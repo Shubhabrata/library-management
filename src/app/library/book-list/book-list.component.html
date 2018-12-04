@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-md-4 offset-md-1">
+    <div class="input-group">
+      <input type="text" class="form-control" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by title..." (keyup)="searchByTitle()">
+      <div class="input-group-append">
+        <span class="input-group-text"><ion-icon class="icon" name="search"></ion-icon></span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 filter-by-age">
+    <div class="row">
+      <div class="col-md-auto title">
+        <span>Filter by category:</span>
+      </div>
+      <div class="col">
+        Category dropdown comes here
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="list-group books-list">
+  <div *ngFor="let item of items" class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="row">
+      <div class="col col-md-2 image-col">
+        <img class="image" [src]="item.payload.doc.data().thumbnailImageURL" style="height: 100px;width: auto;">
+      </div>
+      <div class="col col-md-8 text-col">
+        <h5 class="mb-1">{{item.payload.doc.data().title}} <i>by {{item.payload.doc.data().author}}</i></h5>
+        <small>Rating: {{item.payload.doc.data().rating}}</small>
+      </div>
+      <div class="col col-md-2 actions-col">
+        <button class="btn btn-outline-primary action" (click)="viewDetails(item)" type="button">
+          <ion-icon class="icon" name="arrow-round-forward"></ion-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

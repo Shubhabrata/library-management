@@ -1,0 +1,29 @@
+<div class="page-container">
+	<div class="side-bar">
+		<ul class="nav flex-column">
+			<li class="nav-item">
+				<a class="nav-link active" routerLink="home">
+					<ion-icon name="home"></ion-icon>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" routerLink="login">
+					<ion-icon name="person"></ion-icon>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" routerLink="library/new-book">
+					<ion-icon name="add"></ion-icon>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" routerLink="library">
+					<ion-icon name="book"></ion-icon>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="content-container">
+		<router-outlet></router-outlet>
+	</div>
+</div>

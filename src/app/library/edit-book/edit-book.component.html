@@ -1,0 +1,125 @@
+<div class="edit-page">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Edit Book</li>
+    </ol>
+  </nav>
+  <div class="page-content">
+    <div class="row">
+      <div class="col col-md-4">
+        <img class="img-avatar" [src]="item.thumbnailImageURL">
+      </div>
+      <div class="col col-md-8">
+
+        <form class="create-form" [formGroup]="editBookForm" novalidate (ngSubmit)="onSubmit(editBookForm.value)">
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput placeholder="ISBN" class="form-control" formControlName="isbn">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.isbn">
+              <mat-error *ngIf="editBookForm.get('isbn').hasError(validation.type) && (editBookForm.get('isbn').dirty || editBookForm.get('isbn').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput placeholder="Title" class="form-control" formControlName="title">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.title">
+              <mat-error *ngIf="editBookForm.get('title').hasError(validation.type) && (editBookForm.get('title').dirty || editBookForm.get('title').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput placeholder="Author" class="form-control" formControlName="author">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.author">
+              <mat-error *ngIf="editBookForm.get('author').hasError(validation.type) && (editBookForm.get('author').dirty || editBookForm.get('author').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput placeholder="Category" class="form-control" formControlName="category">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.category">
+              <mat-error *ngIf="editBookForm.get('category').hasError(validation.type) && (editBookForm.get('category').dirty || editBookForm.get('category').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <textarea matInput placeholder="Description" class="form-control" formControlName="description"></textarea>
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.description">
+              <mat-error *ngIf="editBookForm.get('description').hasError(validation.type) && (editBookForm.get('description').dirty || editBookForm.get('description').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput placeholder="Book Location (shelf number)" class="form-control" formControlName="shelfNumber">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.shelfNumber">
+              <mat-error *ngIf="editBookForm.get('shelfNumber').hasError(validation.type) && (editBookForm.get('shelfNumber').dirty || editBookForm.get('shelfNumber').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput placeholder="Thumbnail Image URL" class="form-control" formControlName="thumbnailImageURL">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.thumbnailImageURL">
+              <mat-error *ngIf="editBookForm.get('thumbnailImageURL').hasError(validation.type) && (editBookForm.get('thumbnailImageURL').dirty || editBookForm.get('thumbnailImageURL').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput type="number" min="0" max="100" placeholder="Rating" class="form-control" formControlName="rating">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.rating">
+              <mat-error *ngIf="editBookForm.get('rating').hasError(validation.type) && (editBookForm.get('rating').dirty || editBookForm.get('rating').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input matInput type="number" min="0" max="100" placeholder="Copies" class="form-control" formControlName="copies">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.copies">
+              <mat-error *ngIf="editBookForm.get('copies').hasError(validation.type) && (editBookForm.get('copies').dirty || editBookForm.get('copies').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="row submit-button-container">
+            <div class="col-md-4">
+              <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!editBookForm.valid">Save</button>
+            </div>
+            <div class="col-md-4">
+              <button mat-raised-button class="delete-button" color="warn" type="button" (click)="delete()">Delete</button>
+            </div>
+          </div>
+          <div class="row submit-button-container">
+            <div class="col-md-4">
+              <button mat-raised-button class="submit-button" color="primary" type="button">Issue Book</button>
+            </div>
+            <div class="col-md-4">
+              <button mat-raised-button class="submit-button" color="primary" type="button">Renew Book</button>
+            </div>
+          </div>
+          <div class="row submit-button-container">
+            <div class="col-md-4">
+              <button mat-raised-button class="submit-button" color="primary" type="button">Return this book</button>
+            </div>
+            <div class="col-md-4">
+              <button mat-raised-button class="submit-button" color="primary" type="button">Add to my favorites</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
