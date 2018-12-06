@@ -9,6 +9,8 @@ import {
 import { MatDialog } from "@angular/material";
 import { LibraryFirebaseService } from "../services/library.firebase.service";
 import { Router } from "@angular/router";
+import { SocialAuthService } from '../../core/services/social-auth.service';
+
 
 @Component({
   selector: "library-edit-book",
@@ -43,7 +45,8 @@ export class EditBookComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: SocialAuthService
   ) {}
 
   ngOnInit() {
@@ -107,5 +110,9 @@ export class EditBookComponent implements OnInit {
 
   cancel() {
     this.router.navigate(["/library"]);
+  }
+  issueBook(){
+    console.log(this.authService.name);
+    
   }
 }

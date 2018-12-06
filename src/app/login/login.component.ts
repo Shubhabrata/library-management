@@ -1,10 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-
-import { AuthService } from "angularx-social-login";
-import { SocialUser } from "angularx-social-login";
-import {
-  GoogleLoginProvider
-} from "angularx-social-login";
+import { Component } from "@angular/core";
+import { SocialAuthService } from '../core/services/social-auth.service';
 
 @Component({
   selector: "app-login",
@@ -12,18 +7,16 @@ import {
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent {
-  user: SocialUser;
 
-  constructor(private authService: AuthService) {}
-
-  ngOnInit() {
-    this.authService.authState.subscribe(user => {
-      this.user = user;
-    });
-  }
+  constructor(private authService: SocialAuthService) { }
 
   signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.authService.signInWithGoogle().then(
+      user => {
+        this.authService.userEmail = user.email;
+        this.authService.name = user.name;
+      }
+    );
   }
 
   signOut(): void {

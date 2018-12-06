@@ -2,13 +2,15 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatButtonModule, MatInputModule, MatSliderModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatSliderModule, MatDialogModule } from '@angular/material';
 
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from "./app.routing.module";
+
+import { CoreModule } from './core/core.module';
 import { LibraryModule } from './library/library.module';
 import { LoginModule } from './login/login.module';
 
@@ -23,13 +25,14 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule,AppRoutingModule,
+    ReactiveFormsModule, AppRoutingModule,
     RouterModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
     MatSliderModule,
-    MatDialogModule
+    MatDialogModule,
+    CoreModule
   ],
   bootstrap: [AppComponent],
   schemas: [
