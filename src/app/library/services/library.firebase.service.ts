@@ -1,63 +1,62 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from "rxjs";
+import { IBook } from "./../../core/core.interface";
+import { Injectable } from "@angular/core";
+import { AngularFirestore } from "@angular/fire/firestore";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class LibraryFirebaseService {
+  endPoint = "http://localhost:8080";
+  constructor(public db: AngularFirestore, private http: HttpClient) {}
 
-  constructor(public db: AngularFirestore) {
-    
+  createBook(value) {
+    const url = this.endPoint + "/addBook";
+    return this.http.post(url, value);
   }
 
-  getBook(bookKey){
-    return this.db.collection('books').doc(bookKey).snapshotChanges();
+  getBooks(): Observable<IBook[]> {
+    const url = this.endPoint + "/listBook";
+    return this.http.get<IBook[]>(url);
   }
 
-  updateBook(bookKey, value){
-    value.nameToSearch = value.name;
-    return this.db.collection('books').doc(bookKey).set(value);
+  getBook(bookKey): Observable<IBook> {
+    const url = this.endPoint + "/getBook?id=" + bookKey;
+    return this.http.get<IBook>(url);
   }
 
-  deleteBook(bookKey){
-    return this.db.collection('books').doc(bookKey).delete();
+  updateBook(value) {
+    const url = this.endPoint + "/updateBook";
+    return this.http.post(url, value);
   }
 
-  getBooks(){
-    return this.db.collection('books').snapshotChanges();
-  }
-
-  searchBookByTitle(searchValue){
-    return this.db.collection('books',ref => ref.where('title', '>=', searchValue)
-      .where('title', '<=', searchValue + '\uf8ff'))
-      .snapshotChanges()
-  }
-
-  searchBooksByAuthor(searchValue){
-    return this.db.collection('books',ref => ref.where('title', '>=', searchValue)
-      .where('title', '<=', searchValue + '\uf8ff'))
-      .snapshotChanges()
-  }
-
-  searchBooksByCategory(searchValue){
-    return this.db.collection('books',ref => ref.where('title', '>=', searchValue)
-      .where('title', '<=', searchValue + '\uf8ff'))
-      .snapshotChanges()
+  deleteBook(bookKey) {
+    const url = this.endPoint + "/deleteBook?id=" + bookKey;
+    return this.http.get<IBook>(url);
   }
 
 
-
-  createBook(value){
-    return this.db.collection('books').add({
-      isbn: value.isbn,
-      title: value.title,
-      author: value.author,
-      category: value.category,
-      description: value.description,
-      shelfNumber: parseInt(value.shelfNumber),
-      thumbnailImageURL: value.thumbnailImageURL,
-      rating: parseFloat(value.rating),
-      copies: parseFloat(value.copies)
-    });
+  searchBookByTitle(searchValue) {
+    const url = this.endPoint + "/searchTitle?title=" + searchValue;
+    return this.http.get<IBook[]>(url);
   }
+
+  searchBooksByAuthor(searchValue) {
+    const url = this.endPoint + "/searchAuthor?author=" + searchValue;
+    return this.http.get<IBook[]>(url);
+  }
+
+
+  searchBooksByCategory(searchValue) {
+    const url = this.endPoint + "/searchCategory?category=" + searchValue;
+    return this.http.get<IBook[]>(url);
+  }
+
+
+  issueBook(book_id, user_email) {
+    const url = this.endPoint + "/issueBook?book_id=" + book_id + '&user_email=' + user_email;
+    return this.http.get<IBook[]>(url);
+  }
+
 }

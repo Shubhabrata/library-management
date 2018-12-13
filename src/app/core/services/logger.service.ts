@@ -2,30 +2,24 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class LoggerService {
+  constructor() {}
 
-    constructor() { }
-
-    log(msg: string) {
-        if (!environment.production) {
-            console.log(msg);
-        }
-        else {
-            // AppInsights
-        }
-
+  log(msg: string) {
+    if (!environment.production) {
+      console.log(msg);
+    } else {
+      console.log('dev environment log: ' + msg);
     }
+  }
 
-    logError(msg: string) {
-        if (!environment.production) {
-            console.error(msg);
-        }
-        else {
-            // AppInsights
-        }
-
+  logError(msg: string) {
+    if (!environment.production) {
+      console.error(msg);
+    } else {
+      console.log('dev environment log: ' + msg);
     }
-
+  }
 }

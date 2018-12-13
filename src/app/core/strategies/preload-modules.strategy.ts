@@ -7,7 +7,6 @@ import { LoggerService } from '../services/logger.service';
 
 @Injectable()
 export class PreloadModulesStrategy implements PreloadingStrategy {
-
   constructor(private logger: LoggerService) {}
 
   preload(route: Route, load: () => Observable<any>): Observable<any> {
@@ -18,5 +17,4 @@ export class PreloadModulesStrategy implements PreloadingStrategy {
       return of(null);
     }
   }
-
 }

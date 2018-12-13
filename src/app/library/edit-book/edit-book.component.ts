@@ -9,11 +9,10 @@ import {
 import { MatDialog } from "@angular/material";
 import { LibraryFirebaseService } from "../services/library.firebase.service";
 import { Router } from "@angular/router";
-import { SocialAuthService } from '../../core/services/social-auth.service';
-
+import { SocialAuthService } from "../../core/services/social-auth.service";
 
 @Component({
-  selector: "library-edit-book",
+  selector: "app-library-edit-book",
   templateUrl: "./edit-book.component.html",
   styleUrls: ["./edit-book.component.scss"]
 })
@@ -51,10 +50,10 @@ export class EditBookComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(routeData => {
-      let data = routeData["data"];
+      const data = routeData["data"];
       if (data) {
-        this.item = data.payload.data();
-        this.item.id = data.payload.id;
+        this.item = data;
+        this.item.id = data.id;
         this.createForm();
       }
     });
@@ -70,49 +69,31 @@ export class EditBookComponent implements OnInit {
       shelfNumber: [this.item.shelfNumber, Validators.required],
       thumbnailImageURL: [this.item.thumbnailImageURL, Validators.required],
       rating: [this.item.rating, Validators.required],
-      copies: [this.item.copies, Validators.required],
-      
-      
+      copies: [this.item.copies, Validators.required]
     });
   }
-  /*
-  openDialog() {
-    const dialogRef = this.dialog.open(AvatarDialogComponent, {
-      height: '400px',
-      width: '400px'
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        this.item.avatar = result.link;
-      }
-    });
-  }
-*/
   onSubmit(value) {
-    value.avatar = this.item.avatar;
-    value.age = Number(value.age);
-    this.firebaseService.updateBook(this.item.id, value).then(res => {
+    value.id = Number(this.item.id);
+    this.firebaseService.updateBook(value).subscribe(res => {
       this.router.navigate(["/library"]);
     });
   }
 
   delete() {
-    this.firebaseService.deleteBook(this.item.id).then(
-      res => {
-        this.router.navigate(["/library"]);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    this.firebaseService.deleteBook(this.item.id).subscribe(res =>{
+      this.router.navigate(["/library"]);  
+    });
   }
 
   cancel() {
     this.router.navigate(["/library"]);
   }
-  issueBook(){
-    console.log(this.authService.name);
-    
+
+  issueBook() {
+    this.firebaseService.issueBook(this.item.id, this.authService.userEmail).subscribe(res=>{
+      console.log(res);
+      //this.router.navigate(["/library"]);
+    })
   }
 }

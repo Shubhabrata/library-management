@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyBr53c_y0cYIrlb2QhGXc-co8JB0yEWg0U",
-    authDomain: "mindtree-angular-201.firebaseapp.com",
-    databaseURL: "https://mindtree-angular-201.firebaseio.com",
-    projectId: "mindtree-angular-201",
-    storageBucket: "mindtree-angular-201.appspot.com",
-    messagingSenderId: "509216902404"
+    apiKey: 'AIzaSyBr53c_y0cYIrlb2QhGXc-co8JB0yEWg0U',
+    authDomain: 'mindtree-angular-201.firebaseapp.com',
+    databaseURL: 'https://mindtree-angular-201.firebaseio.com',
+    projectId: 'mindtree-angular-201',
+    storageBucket: 'mindtree-angular-201.appspot.com',
+    messagingSenderId: '509216902404'
   }
 };
 

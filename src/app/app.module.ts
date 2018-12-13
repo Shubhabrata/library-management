@@ -4,11 +4,16 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatButtonModule, MatInputModule, MatSliderModule, MatDialogModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatInputModule,
+  MatSliderModule,
+  MatDialogModule
+} from '@angular/material';
 
 import { environment } from '../environments/environment';
 
-import { AppRoutingModule } from "./app.routing.module";
+import { AppRoutingModule } from './app.routing.module';
 
 import { CoreModule } from './core/core.module';
 import { LibraryModule } from './library/library.module';
@@ -18,14 +23,12 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent
-  ],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule, AppRoutingModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
     RouterModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -35,8 +38,6 @@ import { HomeComponent } from './home/home.component';
     CoreModule
   ],
   bootstrap: [AppComponent],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {}
