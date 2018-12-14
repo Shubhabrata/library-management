@@ -105,7 +105,6 @@ export class NewBookComponent implements OnInit {
         });
         this.thumbnailImageURL = book['volumeInfo']['imageLinks']['thumbnail'];
       }
-      console.log(data);
     });
   }
 }
